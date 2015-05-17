@@ -8,3 +8,9 @@ Features:
 	- Uses QtWebKit for Qt5
 	- You can change the browsed page from inside the program (opposite to surf)
 	- Has a back button. 
+
+Requirements (Arch Linux):
+	- qt5-qtbase
+	- python-pyqt5
+	- qt5-webkit
+
