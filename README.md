@@ -14,3 +14,5 @@ Requirements (Arch Linux):
 	- python-pyqt5
 	- qt5-webkit
 
+Installation:
+	Copy to /usr/bin or $HOME/bin
