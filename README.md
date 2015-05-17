@@ -19,3 +19,6 @@ Requirements (Arch Linux):
 Installation:
 
 	Copy to /usr/bin or $HOME/bin
+
+TODO:
+	- Add dialog for downloading files
