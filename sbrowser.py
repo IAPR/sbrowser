@@ -42,6 +42,7 @@ class Form(QWidget):
 
     def changePage(self):
         self.setWindowTitle(self.webview.url().url() + " - sbrowser")
+        self.nameLine.setText(self.webview.url().url())
 
     def goBack(self):
         self.webview.back()
