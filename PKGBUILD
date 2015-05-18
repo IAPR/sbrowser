@@ -16,6 +16,6 @@ sha256sums=("SKIP")
 package() {
     cd "$srcdir/$pkgname"
     python setup.py install --root="$pkgdir/" --optimize=1
-    mkdir /usr/share/doc/sbrowser
-    cp LICENSE README.md /usr/share/doc/sbrowser
+    install -Dm755 LICENSE $pkgdir/usr/share/doc/$pkgname/LICENSE
+    install -Dm755 README.md $pkgdir/usr/share/doc/$pkgname/README
 }
