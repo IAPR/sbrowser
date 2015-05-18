@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     # basic stuff here
-    scripts = [
-        'sbrowser'
-    ]
+    scripts = ['sbrowser'],
+    package_data={'': ['LICENSE'], '': ['README.md']},
+    include_package_data=True
 )
