@@ -1,6 +1,6 @@
 # Maintainer: Ivan Pacheco (Kinokoio) <kinokoio@hotmail.com>
 
-pkgname=sbrowser
+pkgname=sbrowser-git
 pkgver=0.0.1
 pkgrel=1
 pkgdesc="Simple browser based on PyQt5 and QtWebKit"
