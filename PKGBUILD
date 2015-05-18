@@ -9,18 +9,13 @@ url="https://github.com/kinokoio/sbrowser"
 license=('GPL')
 depends=('python>=3.4' 'python-pyqt5>=5.2' 'qt5-base>=5.2'
          'qt5-webkit>=5.2')
-makedepends('coreutils' 'git')
-source=("git+https://github.com/kinokoio/sbrowser.git")
+makedepends=('coreutils' 'git')
+source=("git+https://github.com/kinokoio/sbrowser")
 sha256sums=("SKIP")
 
-build() {
-    cd "$srcdir"
-    python setup.py build
-}
-
 package() {
-    cd "$srcdir"
-    python setup.py install 
+    cd "$srcdir/$pkgname"
+    python setup.py install --root="$pkgdir/" --optimize=1
     mkdir /usr/share/doc/sbrowser
     cp LICENSE README.md /usr/share/doc/sbrowser
 }
