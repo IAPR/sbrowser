@@ -15,6 +15,7 @@ Requirements (Arch Linux):
 	- qt5-qtbase
 	- python-pyqt5
 	- qt5-webkit
+	- python-setuptools
 
 Installation:
 

@@ -7,8 +7,8 @@ pkgdesc="Simple browser based on PyQt5 and QtWebKit"
 arch=(any)
 url="https://github.com/kinokoio/sbrowser"
 license=('GPL')
-depends=('python>=3.4' 'python-pyqt5>=5.2' 'qt5-base>=5.2'
-         'qt5-webkit>=5.2')
+depends=('python' 'python-pyqt5' 'qt5-base'
+         'qt5-webkit' 'python-setuptools')
 makedepends=('coreutils' 'git')
 source=("git+https://github.com/kinokoio/sbrowser")
 sha256sums=("SKIP")
