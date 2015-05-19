@@ -78,7 +78,7 @@ class Form(QWidget):
         self.nameLine.setText(self.sender().url().url())
 
     def goBack(self):
-        self.webview.back()
+        self.lWebView[self.tabWidget.currentIndex()].back()
 
 if __name__ == '__main__':
     import sys
