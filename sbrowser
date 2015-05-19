@@ -71,7 +71,7 @@ class Form(QWidget):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.sender()), "Loading")
 
     def changePage(self):
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.sender()), self.sender().title() + " - sbrowser")
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.sender()), self.sender().title()[:15] + "...")
         self.nameLine.setText(self.sender().url().url())
 
     def goBack(self):
