@@ -1,7 +1,7 @@
 # Maintainer: Ivan Pacheco (Kinokoio) <kinokoio@hotmail.com>
 
 pkgname=sbrowser-git
-pkgver=e5e2575..d17a1ea
+pkgver=54f3b5a
 pkgrel=1
 pkgdesc="Simple browser based on PyQt5 and QtWebKit"
 arch=(any)
@@ -14,8 +14,8 @@ source=("git+https://github.com/kinokoio/sbrowser")
 sha256sums=("SKIP")
 
 package() {
-    cd "$srcdir/$pkgname"
+    cd "$srcdir/sbrowser"
     python setup.py install --root="$pkgdir/" --optimize=1
-    install -Dm755 LICENSE $pkgdir/usr/share/doc/$pkgname/LICENSE
-    install -Dm755 README.md $pkgdir/usr/share/doc/$pkgname/README
+    install -Dm755 LICENSE $pkgdir/usr/share/doc/sbrowser/LICENSE
+    install -Dm755 README.md $pkgdir/usr/share/doc/sbrowser/README
 }
