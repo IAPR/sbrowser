@@ -1,9 +1,10 @@
-#!/bin/env python3
+#!/usr/bin/python
 
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtWebKitWidgets import *
- 
+import sip 
+
 class Form(QWidget):
     def __init__(self, parent=None):
         super(Form, self).__init__(parent)
@@ -11,38 +12,67 @@ class Form(QWidget):
         nameLabel = QLabel("URI")
         self.nameLine = QLineEdit()
         self.backButton = QPushButton("<-")
-        self.webview = QWebView()
- 
+        self.newTabButton = QPushButton("+")
+        self.destroyTabButton = QPushButton("-")
+        self.tabWidget = QTabWidget()
+
+        #Creates QWebView List
+        self.lWebView = []
+
         HLayout1 = QHBoxLayout()
         HLayout1.addWidget(self.backButton)
         HLayout1.addWidget(nameLabel)
         HLayout1.addWidget(self.nameLine)
- 
-        self.nameLine.returnPressed.connect(self.requestUri)
-        self.backButton.clicked.connect(self.goBack)
-        self.webview.loadProgress.connect(self.loading)
-        self.webview.loadFinished.connect(self.changePage)
- 
+        HLayout1.addWidget(self.newTabButton)
+        HLayout1.addWidget(self.destroyTabButton)
+
         mainLayout = QGridLayout()
         mainLayout.addLayout(HLayout1, 0, 1)
-        mainLayout.addWidget(self.webview, 1, 1)
+        mainLayout.addWidget(self.tabWidget, 1, 1)
+        self.addTab()
+
+        # Events
+        self.nameLine.returnPressed.connect(self.requestUri)
+        self.backButton.clicked.connect(self.goBack)
+        self.newTabButton.clicked.connect(self.addTab)
+        self.destroyTabButton.clicked.connect(self.rmTab)
+        self.tabWidget.currentChanged.connect(self.changeTab)
  
         self.setLayout(mainLayout)
         self.setWindowTitle("sbrowser")
- 
+
+    def addTab(self):
+        webView = QWebView()
+        webView.loadProgress.connect(self.loading)
+        webView.loadFinished.connect(self.changePage)
+        self.tabWidget.addTab(webView, "New Tab")
+        self.lWebView.append(webView)
+        self.tabWidget.setCurrentWidget(webView)
+
+    def rmTab(self):
+        self.tabWidget.removeTab(self.tabWidget.currentIndex())
+        self.lWebView.remove(self.lWebView[self.tabWidget.currentIndex()])
+        #self.lWebView.remove(self.tabWidget.currentIndex())
+
+    def changeTab(self):
+        self.nameLine.setText(self.lWebView[self.tabWidget.currentIndex()].url().url())
+
     def requestUri(self):
-        url = QUrl(self.nameLine.text())
-        if url.isValid():
-            self.webview.load(url)
+        if self.tabWidget.currentIndex() != -1:
+            url = QUrl(self.nameLine.text())
+            if url.isValid():
+                self.lWebView[self.tabWidget.currentIndex()].load(url)
+            else:
+                print("Url not valid")
         else:
-            self.setWindowTitle("URI not valid - sbrowser")
+            print("No tabs open, open one first.")
 
     def loading(self):
-        self.setWindowTitle("Loading" + " - sbrowser")
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.sender()), "Loading")
 
     def changePage(self):
-        self.setWindowTitle(self.webview.url().url() + " - sbrowser")
-        self.nameLine.setText(self.webview.url().url())
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.sender()), self.sender().title() + " - sbrowser")
+        self.nameLine.setText(self.sender().url().url())
 
     def goBack(self):
         self.webview.back()
