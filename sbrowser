@@ -71,7 +71,10 @@ class Form(QWidget):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.sender()), "Loading")
 
     def changePage(self):
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.sender()), self.sender().title()[:15] + "...")
+        if len(self.sender().title()) > 15:
+            self.tabWidget.setTabText(self.tabWidget.indexOf(self.sender()), self.sender().title()[:15] + "...")
+        else:
+             self.tabWidget.setTabText(self.tabWidget.indexOf(self.sender()), self.sender().title())
         self.nameLine.setText(self.sender().url().url())
 
     def goBack(self):
